@@ -11,6 +11,7 @@ import ShoppingCartIcon from "./svg/shopping_cart.svg";
 import { IPizza } from "@/store/pizza.interface";
 import Link from "next/link";
 import Cart from "../cart/Cart";
+import CloseBtn from "./svg/close_vector.svg";
 
 const Header: React.FC = () => {
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
@@ -51,7 +52,7 @@ const Header: React.FC = () => {
         className={`${styles.header} ${isCartOpen ? styles.disabled : ""}`}
       >
         <div className={styles.headerWrapper}>
-          <Link href={'/'}>
+          <Link href={"/"}>
             <div className={styles.iconContainer}>
               <Image
                 className={styles.icon}
@@ -86,26 +87,33 @@ const Header: React.FC = () => {
             {searchTerm && (
               <div className={styles.searchResults}>
                 {filteredPizzas.map((pizza) => (
-                  <div key={pizza.id} className={styles.resultItem}>
-                    <div>
-                      <Image
-                        src={pizza.image}
-                        alt={pizza.name}
-                        width={40}
-                        height={40}
-                      />
+                  <Link
+                    href={`/pizza/${pizza.id}`}
+                    key={pizza.id}
+                    onClick={() => setSearchTerm("")} 
+                  >
+                    <div className={styles.resultItem}>
+                      <div>
+                        <Image
+                          src={pizza.image}
+                          alt={pizza.name}
+                          width={40}
+                          height={40}
+                        />
+                      </div>
+                      <div className={styles.pizzaText}>
+                        <span>{pizza.name}</span>
+                        <span className={styles.pizzaprice}>
+                          {pizza.price}₽
+                        </span>
+                      </div>
                     </div>
-                    <div className={styles.pizzaText}>
-                      <span>{pizza.name}</span>
-                      <span className={styles.pizzaprice}>{pizza.price}₽</span>
-                    </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Кнопки */}
           <div className={styles.buttons}>
             <button className={styles.signInButton} disabled={isCartOpen}>
               <Image src={SignInIcon} alt="Иконка входа" />
@@ -121,12 +129,11 @@ const Header: React.FC = () => {
         </div>
       </header>
 
-      {/* Модальное окно корзины */}
       <div
         className={`${styles.cartModal} ${isCartOpen ? styles.cartOpen : ""}`}
       >
         <button className={styles.closeButton} onClick={closeCart}>
-          <Image src={""} alt="Закрыть" />
+          <Image src={CloseBtn} alt="Закрыть" />
         </button>
         <Cart />
       </div>
