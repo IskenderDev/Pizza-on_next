@@ -35,3 +35,12 @@ export interface IPizzaStore {
   filteredPizzas: IPizza[];
   setFilteredPizzas: (pizzas: IPizza[]) => void; 
 }
+// modal.interface.ts
+export interface ModalProps {
+  isOpen: boolean;
+  title?: string;
+  price?: number;
+  image?: string;
+  onConfirm: (size: string, dough: string, toppings: string[]) => void;
+  onClose: () => void;
+}

@@ -10,6 +10,7 @@ import SignInIcon from "./svg/sign_in_icon.svg";
 import ShoppingCartIcon from "./svg/shopping_cart.svg";
 import { IPizza } from "@/store/pizza.interface";
 import Link from "next/link";
+import Cart from "../cart/Cart";
 
 const Header: React.FC = () => {
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
@@ -127,8 +128,7 @@ const Header: React.FC = () => {
         <button className={styles.closeButton} onClick={closeCart}>
           <Image src={""} alt="Закрыть" />
         </button>
-        <h2>Корзина</h2>
-        <p>Ваша корзина пуста.</p>
+        <Cart />
       </div>
     </>
   );
