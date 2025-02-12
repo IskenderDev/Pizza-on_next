@@ -37,12 +37,8 @@ export interface IPizzaStore {
   setDoughType: (type: string) => void;
   setFilteredPizzas: (pizzas: IPizza[]) => void;
 }
-// modal.interface.ts
-export interface ModalProps {
+export interface ModalProps extends Partial<IPizzaDataSingle> {
   isOpen: boolean;
-  title?: string;
-  price?: number;
-  image?: string;
   onConfirm: (size: string, dough: string, toppings: string[]) => void;
   onClose: () => void;
 }

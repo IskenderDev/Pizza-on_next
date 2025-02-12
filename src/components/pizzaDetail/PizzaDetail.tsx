@@ -2,31 +2,43 @@
 
 import { NextPage } from "next";
 import Image from "next/image";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { IPizzaDataSingle } from "@/store/pizza.interface";
-import { usePizzaStore } from "@/store/usePizzaStore"; // Подключаем хранилище
+import { usePizzaStore } from "@/store/usePizzaStore"; 
 import styles from "./styles.module.scss";
 import Link from "next/link";
+import PizzaList from "../pizzaList/PizzaList";
+import { usePizzaCustomization } from "@/hooks/usePizzaCustomization";  
 
 const PizzaDetail: NextPage<IPizzaDataSingle> = ({ pizza }) => {
   const [size, setSize] = useState("Маленькая");
   const [dough, setDough] = useState("Традиционное");
-
-  // Получаем пиццы из хранилища Zustand
   const pizzas = usePizzaStore((state) => state.pizzas);
-  const fetchPizzas = usePizzaStore((state) => state.fetchPizzas);  // Функция для загрузки пицц
+  const fetchPizzas = usePizzaStore((state) => state.fetchPizzas);
 
-  // Загружаем пиццы при первом рендере
+  const onClose = () => {
+    console.log("Modal closed");
+  };
+
+  const {
+    toppings,
+    handleToppingChange,
+    toppingsData,
+    calculateTotalPrice,
+    handleConfirm,
+  } = usePizzaCustomization(pizza, onClose);
+
   useEffect(() => {
     if (pizzas.length === 0) {
-      fetchPizzas();  // Загружаем пиццы, если они еще не загружены
+      fetchPizzas();
     }
   }, [pizzas, fetchPizzas]);
 
-  // Рекомендованные пиццы
-  const recommendedPizzas = useMemo(() => {
-    return pizzas.slice(0, 4);  // Получаем первые 4 пиццы для рекомендаций
-  }, [pizzas]);
+  const onAddToCart = (pizza: any) => {
+    console.log(pizza);
+  };
+
+  const limitedPizzas = pizzas.slice(0, 4);
 
   if (pizzas.length === 0) {
     return (
@@ -41,10 +53,6 @@ const PizzaDetail: NextPage<IPizzaDataSingle> = ({ pizza }) => {
       <nav className={styles.breadcrumbs}>
         <Link href="/">Главная</Link> / <span>{pizza.name}</span>
       </nav>
-
-      <button className={styles.backButton} onClick={() => history.back()}>
-        ← Назад
-      </button>
 
       <div className={styles.pizzaDetails}>
         <div className={styles.imageWrapper}>
@@ -78,27 +86,36 @@ const PizzaDetail: NextPage<IPizzaDataSingle> = ({ pizza }) => {
             ))}
           </div>
 
-          <button className={styles.addToCart}>
-            Добавить в корзину за {pizza.price}₽
+          <div className={styles.toppingsGroup}>
+            <h4>Добавить по вкусу:</h4>
+            <div className={styles.toppingsList}>
+              {toppingsData.map((topping) => (
+                <div
+                  key={topping.name}
+                  className={`${styles.toppingItem} ${toppings.includes(topping.name) ? styles.active : ""}`}
+                  onClick={() => handleToppingChange(topping.name)}
+                >
+                  <Image
+                    width={100}
+                    height={100}
+                    src={topping.img}
+                    alt={topping.name}
+                    className={styles.toppingImage}
+                  />
+                  <span>{topping.name}</span>
+                  <span>{topping.price}₽</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <button className={styles.addToCart} onClick={handleConfirm}>
+            Добавить в корзину за {calculateTotalPrice()}₽
           </button>
         </div>
       </div>
-
-      {/* Рекомендации */}
-      {recommendedPizzas.length > 0 && (
-        <div className={styles.recommendations}>
-          <h2>Рекомендуем попробовать</h2>
-          <div className={styles.recommendationsList}>
-            {recommendedPizzas.map((recPizza) => (
-              <Link href={`/pizza/${recPizza.id}`} key={recPizza.id} className={styles.recommendationItem}>
-                <Image src={recPizza.image} alt={recPizza.name} width={150} height={150} />
-                <span>{recPizza.name}</span>
-                <span>{recPizza.price}₽</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+      <h2 className={styles.rec}>Рекомендации</h2>
+      <PizzaList pizzas={limitedPizzas} onAddToCart={onAddToCart} />
     </div>
   );
 };

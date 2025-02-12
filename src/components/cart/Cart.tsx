@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import { useCartStore } from "@/store/usePizzaStore";
 import styles from "./styles.module.scss";
+import { useCartStore } from "@/store/cartStore/useCartStore";
 
 const Cart = () => {
   const { cart, updateQuantity, clearCart } = useCartStore();
