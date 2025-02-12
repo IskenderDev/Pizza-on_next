@@ -11,6 +11,7 @@ import ShoppingCartIcon from "./svg/shopping_cart.svg";
 import { IPizza } from "@/store/pizza.interface";
 import Link from "next/link";
 import Cart from "../cart/Cart";
+import CloseBtn from './svg/close_vector.svg'
 
 const Header: React.FC = () => {
   const [pizzas, setPizzas] = useState<IPizza[]>([]);
@@ -126,7 +127,7 @@ const Header: React.FC = () => {
         className={`${styles.cartModal} ${isCartOpen ? styles.cartOpen : ""}`}
       >
         <button className={styles.closeButton} onClick={closeCart}>
-          <Image src={""} alt="Закрыть" />
+          <Image src={CloseBtn} alt="Закрыть" />
         </button>
         <Cart />
       </div>
