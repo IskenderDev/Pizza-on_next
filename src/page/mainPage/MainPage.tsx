@@ -51,7 +51,6 @@ const MainPage: React.FC<{ pizzas: IPizza[] }> = ({ pizzas }) => {
         }}
         onClose={() => setSelectedPizza(null)}
       />
-      <Cart />
     </div>
   );
 };
