@@ -2,13 +2,13 @@
 
 import React from "react";
 import Image from "next/image";
-import { useCartStore } from "@/store/usePizzaStore";
-import styles from "./styles.module.scss";
+import styles from "./styles.module.scss"
 import Box from '../../../public/img/box.svg'
+import { useCartStore } from "@/store/cartStore/useCartStore";
 const Cart = () => {
   const { cart, updateQuantity, clearCart } = useCartStore();
 
-  // Подсчет итоговой суммы
+
   const totalPrice = cart.reduce((sum, pizza) => sum + pizza.quantity * pizza.totalPrice, 0);
   const tax = Math.round(totalPrice * 0.05);
 
@@ -56,7 +56,7 @@ const Cart = () => {
             Очистить корзину
           </button>
           
-          {/* Итоговая сумма */}
+  
           <div className={styles.sum}>
             <div className={styles.summary}>
               <div className={styles.total}>
