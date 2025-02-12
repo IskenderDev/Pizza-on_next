@@ -1,16 +1,17 @@
 .container {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
+  font-family: "Arial", sans-serif;
 }
 
 .breadcrumbs {
   font-size: 14px;
-  margin-bottom: 15px;
+  color: #999;
 
   a {
-    text-decoration: none;
     color: #ff6600;
+    text-decoration: none;
 
     &:hover {
       text-decoration: underline;
@@ -22,80 +23,180 @@
   }
 }
 
+.backButton {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #ff6600;
+  cursor: pointer;
+  margin-bottom: 10px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .pizzaDetails {
   display: flex;
-  gap: 20px;
+  gap: 30px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-  .pizzaImage {
-    width: 300px;
-    height: auto;
-    border-radius: 10px;
+.imageWrapper {
+  flex: 1;
+
+  img {
+    border-radius: 8px;
   }
+}
 
-  .info {
-    flex: 1;
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 
-    h1 {
-      font-size: 24px;
-      margin-bottom: 10px;
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.optionsGroup {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+
+  .optionButton {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #ff6600;
+      color: #fff;
     }
 
-    p {
-      font-size: 16px;
-      color: #666;
-    }
-
-    .options, .crust {
-      display: flex;
-      gap: 10px;
-      margin: 15px 0;
-
-      button {
-        padding: 10px 15px;
-        border: none;
-        background: #f5f5f5;
-        cursor: pointer;
-        border-radius: 5px;
-
-        &:hover {
-          background: #ddd;
-        }
-
-        &.active {
-          background: #ff6600;
-          color: #fff;
-        }
-      }
-    }
-
-    .ingredients {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 15px 0;
-
-      .ingredient {
-        background: #f9f9f9;
-        padding: 8px 12px;
-        border-radius: 5px;
-        font-size: 14px;
-      }
-    }
-
-    .addToCart {
-      display: inline-block;
+    &.active {
       background: #ff6600;
       color: white;
-      padding: 12px 20px;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-top: 15px;
-
-      &:hover {
-        background: #e55a00;
-      }
+      border-color: #ff6600;
     }
   }
 }
+
+.toppingsGroup {
+  margin-bottom: 15px;
+
+  h4 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+}
+
+.toppingsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  .toppingItem {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &:hover {
+      background: #ff6600;
+      color: #fff;
+    }
+
+    &.active {
+      background: #ff6600;
+      color: white;
+      border-color: #ff6600;
+    }
+
+    .toppingImage {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 5px;
+    }
+
+    span {
+      font-size: 14px;
+    }
+  }
+}
+
+.addToCart {
+  background: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: auto;
+
+  &:hover {
+    background: #cc5200;
+  }
+}
+.recommendations {
+  margin-top: 30px;
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .recommendationsList {
+    display: flex;
+    gap: 15px;
+  }
+
+  .recommendationItem {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    img {
+      border-radius: 8px;
+    }
+
+    span {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  }
+}
+

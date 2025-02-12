@@ -21,17 +21,19 @@ export interface IPizzaDataSingle{
 
 export interface IPizzaStore {
   pizzas: IPizza[];
-  fetchPizzas: () => Promise<void>;
-  category: string;
-  setCategory: (category: string) => void;
-  sort: string;
-  setSort: (sort: string) => void;
-  priceRange: [number, number];
-  setPriceRange: (range: [number, number]) => void;
-  selectedIngredients: string[];
-  toggleIngredient: (ingredient: string) => void;
-  doughType: string;
-  setDoughType: (type: string) => void;
   filteredPizzas: IPizza[];
-  setFilteredPizzas: (pizzas: IPizza[]) => void; 
+  category: string;
+  sort: string;
+  priceRange: [number, number];
+  selectedIngredients: string[];
+  doughType: string;
+
+  fetchPizzas: () => Promise<void>;
+  initializePizzas?: (pizzas: IPizza[]) => void; 
+  setCategory: (category: string) => void;
+  setSort: (sort: string) => void;
+  setPriceRange: (range: [number, number]) => void;
+  toggleIngredient: (ingredient: string) => void;
+  setDoughType: (type: string) => void;
+  setFilteredPizzas: (pizzas: IPizza[]) => void;
 }
