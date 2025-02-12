@@ -1,4 +1,4 @@
-import PizzaDetail from "@/components/pizzaDetail/PizzaDetail";
+import PizzaDetail from "@/components/pizzaComponents/pizzaDetail/PizzaDetail";
 import { PizzaService } from "@/services/pizzaService";
 import { notFound } from "next/navigation";
 

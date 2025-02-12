@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./CartModal.module.scss";
 
 interface CartItem {
-  id: string; // ID должен быть строкой, так как в API id приходит строкой
+  id: string; 
   name: string;
   price: number;
   image: string;

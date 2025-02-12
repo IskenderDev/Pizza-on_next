@@ -1,4 +1,4 @@
-import PizzaCard from '@/modules/ui/PizzaCards/PizzaCard';
+import PizzaCard from '@/components/pizzaComponents/PizzaCards/PizzaCard';
 import { IPizzaData } from '@/store/pizza.interface';
 import React, { FC } from 'react';
 import styles from './styles.module.scss';

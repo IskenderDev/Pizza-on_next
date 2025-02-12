@@ -28,7 +28,7 @@ export const PizzaService = {
 
   async fetchPizzaById(id: string): Promise<IPizza | null> {
     try {
-      const { data } = await axios.get<IPizza>(`${id}`); // убран "/"
+      const { data } = await axios.get<IPizza>(`${id}`); 
       return data;
     } catch (error) {
       console.error(`Ошибка при загрузке пиццы с id ${id}:`, error);

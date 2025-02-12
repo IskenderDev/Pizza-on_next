@@ -6,7 +6,7 @@ import styles from "./style.module.scss";
 import { ModalProps } from "@/store/pizza.interface";
 import { usePizzaCustomization } from "@/hooks/usePizzaCustomization";
 
-const Modal: React.FC<ModalProps> = ({ isOpen, pizza, onClose }) => {
+const ModalPizza: React.FC<ModalProps> = ({ isOpen, pizza, onClose }) => {
   if (!isOpen || !pizza) return null;
 
   const {
@@ -98,4 +98,4 @@ const Modal: React.FC<ModalProps> = ({ isOpen, pizza, onClose }) => {
   );
 };
 
-export default Modal;
+export default ModalPizza;
