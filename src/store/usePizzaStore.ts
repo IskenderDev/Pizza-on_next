@@ -2,7 +2,63 @@ import { create } from "zustand";
 import { IPizzaStore } from "./pizza.interface";
 import { PizzaService } from "@/services/pizzaService";
 
+interface CartItem {
+  id: string;
+  name: string;
+  image: string;
+  size: string;
+  dough: string;
+  toppings: string[];
+  totalPrice: number;
+  quantity: number;
+}
+
+interface CartStore {
+  cart: CartItem[];
+  addToCart: (pizza: CartItem) => void;
+  updateQuantity: (id: string, delta: number) => void;
+  clearCart: () => void;
+}
+
+export const useCartStore = create<CartStore>((set) => ({
+  cart: [],
+
+  addToCart: (pizza) =>
+    set((state) => {
+      const existingItem = state.cart.find(
+        (item) =>
+          item.id === pizza.id &&
+          item.size === pizza.size &&
+          item.dough === pizza.dough &&
+          JSON.stringify(item.toppings) === JSON.stringify(pizza.toppings)
+      );
+
+      if (existingItem) {
+        return {
+          cart: state.cart.map((item) =>
+            item === existingItem ? { ...item, quantity: item.quantity + 1 } : item
+          ),
+        };
+      }
+
+      return { cart: [...state.cart, { ...pizza, quantity: 1 }] };
+    }),
+
+  updateQuantity: (id, delta) =>
+    set((state) => ({
+      cart: state.cart
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity + delta } : item
+        )
+        .filter((item) => item.quantity > 0),
+    })),
+
+  clearCart: () => set({ cart: [] }),
+}));
+
+
 export const usePizzaStore = create<IPizzaStore>((set) => ({
+  
   pizzas: [],
   filteredPizzas: [],
   fetchPizzas: async () => {

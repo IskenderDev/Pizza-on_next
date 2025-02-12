@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import { useCart } from "@/hooks/useCart";
+import { useCartStore } from "@/store/usePizzaStore";
 import styles from "./styles.module.scss";
 
 const Cart = () => {
-  const { cart, updateQuantity, clearCart } = useCart();
+  const { cart, updateQuantity, clearCart } = useCartStore();
 
   return (
     <div className={styles.cart}>
@@ -13,8 +13,8 @@ const Cart = () => {
         <p>Корзина пуста</p>
       ) : (
         <ul>
-          {cart.map((pizza, index) => (
-            <li key={pizza.id} className={styles.cartItem}>
+          {cart.map((pizza) => (
+            <li key={`${pizza.id}-${pizza.size}-${pizza.dough}-${pizza.toppings.join(",")}`} className={styles.cartItem}>
               <Image
                 src={pizza.image}
                 width={50}
@@ -22,17 +22,27 @@ const Cart = () => {
                 alt={pizza.name}
                 className={styles.cartImage}
               />
-              {`${pizza.name} — ${pizza.size}, ${pizza.dough}, ${pizza.totalPrice}₽ x ${pizza.quantity}`}
-              {pizza.toppings.length > 0 && (
-                <span> (Добавки: {pizza.toppings.join(", ")})</span>
-              )}
-              <button onClick={() => updateQuantity(index, 1)}>+</button>
-              <button onClick={() => updateQuantity(index, -1)}>-</button>
+              <div className={styles.cartDetails}>
+                <span>
+                  {pizza.name} — {pizza.size}, {pizza.dough}, {pizza.totalPrice}₽ x {pizza.quantity}
+                </span>
+                {pizza.toppings.length > 0 && (
+                  <span> (Добавки: {pizza.toppings.join(", ")})</span>
+                )}
+              </div>
+              <div className={styles.cartControls}>
+                <button onClick={() => updateQuantity(pizza.id, 1)}>+</button>
+                <button onClick={() => updateQuantity(pizza.id, -1)}>-</button>
+              </div>
             </li>
           ))}
         </ul>
       )}
-      {cart.length > 0 && <button onClick={clearCart}>Очистить корзину</button>}
+      {cart.length > 0 && (
+        <button className={styles.clearButton} onClick={clearCart}>
+          Очистить корзину
+        </button>
+      )}
     </div>
   );
 };
