@@ -1,0 +1,14 @@
+.Cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  justify-content: center;
+  max-width: 900px;
+}
+
+.Card {
+  width: calc(33.33% - 22px); 
+  min-width: 250px;
+  box-sizing: border-box; 
+
+}

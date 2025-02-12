@@ -1,0 +1,55 @@
+.name{
+  margin: 25px 0 ;
+}
+.container{
+  display: flex;
+  justify-content: space-between;
+.filter {
+    display: flex;
+    gap: 10px;
+    font-weight: 400;
+    
+    button {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: none;
+      background: #FAFAFA;
+      cursor: pointer;
+      transition: 0.3s;
+  
+      &.active {
+        background: #ff6b01;
+        color: white;
+      }
+  
+      &:hover {
+        background: #ffd4b3;
+      }
+    }
+  }
+  .sort::before{
+    content: url('../img//sort_icon.svg');
+    margin-top: 5px;
+  }
+  .sort {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 15px;
+    padding: 8px 16px;
+    background: #FAFAFA;
+ 
+    button {
+      border: none;
+      background: none;
+      color: #ff6b01;
+      cursor: pointer;
+    }
+    button::before{
+      content: 'Сортировка: ';
+      color: black;
+    }
+  }
+  
+}
+  
