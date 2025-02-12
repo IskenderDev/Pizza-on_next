@@ -145,8 +145,8 @@
 .cartModal {
   position: fixed;
   top: 0;
-  right: -400px;
-  width: 350px;
+  right: -700px;
+  width: 650px;
   height: 100vh;
   background: white;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
@@ -165,8 +165,8 @@
 
 .closeButton {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 45px;
+  right: 25px;
   background: transparent;
   border: none;
   cursor: pointer;
